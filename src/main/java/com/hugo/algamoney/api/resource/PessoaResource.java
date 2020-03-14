@@ -16,39 +16,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.hugo.algamoney.api.model.Categoria;
-import com.hugo.algamoney.api.repository.CategoriaRepository;
+import com.hugo.algamoney.api.model.Pessoa;
+import com.hugo.algamoney.api.repository.PessoaRepository;
 
 @RestController
-@RequestMapping("/categorias")
-public class CategoriaResource {
+@RequestMapping("/pessoa")
+public class PessoaResource {
 
 	@Autowired
-	private CategoriaRepository categoriaRepository;
+	public PessoaRepository pessoaRepository;
 	
 	@GetMapping
-	public List<Categoria> listar(){
-		return categoriaRepository.findAll(); 
+	public List<Pessoa> findAll(){
+		return pessoaRepository.findAll(); 
+	}
+	
+	@GetMapping("/{codigo}")
+	public ResponseEntity<?> findById(@PathVariable Long codigo){
+		Optional<Pessoa> pessoaEncontrada = pessoaRepository.findById(codigo);
+		return pessoaEncontrada.isPresent() ? ResponseEntity.ok(pessoaEncontrada) : ResponseEntity.notFound().build();
 	}
 	
 	@PostMapping
-	public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria) {
-		
-		Categoria categoriaSalva = categoriaRepository.save(categoria);
+	public ResponseEntity<Pessoa> insert(@Valid @RequestBody Pessoa pessoa){
+		Pessoa pessoaSalva = pessoaRepository.save(pessoa);
 		
 		URI uri = ServletUriComponentsBuilder
 				.fromCurrentRequestUri()
 				.path("/{codigo}")
-				.buildAndExpand(categoriaSalva.getCodigo())
+				.buildAndExpand(pessoaSalva.getCodigo())
 				.toUri();
 		
-		return ResponseEntity.created(uri).body(categoriaSalva);
+		return ResponseEntity.created(uri).body(pessoaSalva);
 	}
 	
-	@GetMapping("/{codigo}")
-	public ResponseEntity<?> findById(@PathVariable Long codigo) {
-		Optional<Categoria> categoriaFind = categoriaRepository.findById(codigo);
-		return categoriaFind.isPresent() ? ResponseEntity.ok(categoriaFind) : ResponseEntity.notFound().build();
-	}
-
 }
