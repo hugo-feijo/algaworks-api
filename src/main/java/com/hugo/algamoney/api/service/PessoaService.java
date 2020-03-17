@@ -14,7 +14,7 @@ public class PessoaService {
 	@Autowired
 	private PessoaRepository pessoaRepository;
 	
-	private Pessoa findById(Long codigo) {
+	public Pessoa findById(Long codigo) {
 		Pessoa pessoaSalva = pessoaRepository.findById(codigo).orElseThrow(() -> new EmptyResultDataAccessException(1));
 		return pessoaSalva;
 	}

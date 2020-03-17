@@ -40,10 +40,10 @@ public class Pessoa {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public boolean isAtivo() {
+	public Boolean isAtivo() {
 		return ativo;
 	}
-	public void setAtivo(boolean ativo) {
+	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
 	public Endereco getEndereco() {

@@ -52,22 +52,35 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 		</dependency>
-		
+
 		<!-- Dependencia do hibernate e Jackson para funcionar o datatype -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-java8</artifactId>		
+			<artifactId>hibernate-java8</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
 		</dependency>
+
+		<!-- Pega a causa da exceção -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-jpamodelgen</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
