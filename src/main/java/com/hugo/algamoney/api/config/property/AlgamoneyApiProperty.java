@@ -1,10 +1,12 @@
 package com.hugo.algamoney.api.config.property;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties("algamoney")
+@ConfigurationProperties(prefix =  "algamoney")
 public class AlgamoneyApiProperty {
 
+	@Value("${origem-Permitida}")
 	private String origemPermitida = "http://localhost:8000";
 	
 	private final Seguranca seguranca = new Seguranca();
@@ -16,6 +18,10 @@ public class AlgamoneyApiProperty {
 	
 	public String getOrigemPermitida() {
 		return origemPermitida;
+	}
+
+	public void setOrigemPermitida(String origemPermitida) {
+		this.origemPermitida = origemPermitida;
 	}
 
 	public static class Seguranca{
