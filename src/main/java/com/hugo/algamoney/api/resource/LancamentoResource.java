@@ -78,6 +78,14 @@ public class LancamentoResource {
 		return ResponseEntity.status(HttpStatus.CREATED).body(lancamentoSalvo);
 	}
 
+	@PostMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_LANCAMENTO') and #oauth2.hasScope('write')")
+	public ResponseEntity<?> update(@PathVariable Long codigo, @Valid @RequestBody Lancamento lancamento){
+		Lancamento lancamentoSalvo = lancamentoService.atualizar(codigo, lancamento);
+		System.out.println("Enter update in resource" + lancamentoSalvo.getObservacao());
+		return ResponseEntity.ok(lancamentoSalvo);
+	}
+	
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PreAuthorize("hasAuthority('ROLE_REMOVER_LANCAMENTO') and #oauth2.hasScope('write')")
