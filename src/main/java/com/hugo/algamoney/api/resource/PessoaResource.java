@@ -44,7 +44,10 @@ public class PessoaResource {
 	@GetMapping
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA')")
 	public Page<Pessoa> findAll(@RequestParam(required = false, defaultValue = "%")String nome, Pageable pageable) {
-		return pessoaRepository.findByNomeContaining(nome, pageable);
+		if(nome.equals("%")) 
+			return pessoaRepository.findAll(pageable);
+		else
+			return pessoaRepository.findByNomeContaining(nome, pageable);
 	}
 
 	@GetMapping("/{codigo}")
